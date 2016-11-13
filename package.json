@@ -1,0 +1,23 @@
+{
+  "name": "ebtestui",
+  "version": "1.0.0",
+  "description": "UI for Test Cases",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epicberry/ebTestUI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/epicberry/ebTestUI/issues"
+  },
+  "homepage": "https://github.com/epicberry/ebTestUI#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7"
+  }
+}

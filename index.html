@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="paramsingh">
+
+<head>
+	<title>Lists Of Test Cases</title>
+	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Lists Of Test Cases
+			</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container main-content" ng-controller="TestCaseController" ng-model="testCases">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="form-inline well well-sm">
+					<span class="glyphicon glyphicon-search"></span>
+					<div class="form-group">
+						<input type="text" class="form-control" id="testCaseId" ng-model="search" placeholder="Search test cases..." />
+					</div>
+					<span class="glyphicon glyphicon-sort-by-attributes"></span>
+					<div class="form-group">
+						<select class="form-control" ng-model="order">
+							<option value="testCaseId">Test Case Id (ASC)</option>
+							<option value="-testCaseId">Test Case Id (DEC)</option>
+							<option value="testCategory">Test Category (ASC)</option>
+							<option value="-testCategory">Test Category (DEC)</option>
+						</select>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered">
+					<tr>
+						<th>#</th>
+						<th>Test Case Id
+							<span ng-click="order = 'testCaseId'" class="glyphicon glyphicon-menu-up"></span>
+							<span ng-click="order = '-testCaseId'" class="glyphicon glyphicon-menu-down"></span>
+						</th>
+						<th>Test Category
+							<span ng-click="order = 'testCategory'" class="glyphicon glyphicon-menu-up"></span>
+							<span ng-click="order = '-testCategory'" class="glyphicon glyphicon-menu-down"></span>
+						</th>
+						<th>Description</th>
+						<th>Run</th>
+					</tr>
+					<tr ng-repeat="testCase in filteredTestCases = (testCases | filter:sensitiveSearch | orderBy:order)" ng-style="{
+							 'background-color': $index == selectedIndex ? 'lightgray' : ''
+						}" ng-click="selectTestCase(testCase, $index)">
+						<td>{{ $index + 1 }}</td>
+						<td>{{ testCase.testCaseId }}</td>
+						<td>{{ testCase.testCategory }}</td>
+						<td>{{ testCase.description }}</td>
+						<td>
+							<input type="checkbox" ng-checked=({{testCase.includeInExecution}}==true) ng-model="testCase.includeInExecution" />
+						</td>
+					</tr>
+					<tr ng-show="filteredTestCases.length == 0">
+						<td colspan="12">
+							<div class="alert alert-info">
+								<p class="text-center">No results found for search term '{{ search }}'</p>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<input type="button" value="Run Test Cases" ng-click="runTestCases(testCases)" />
+	</div>
+	<script src="node_modules/angular/angular.min.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>

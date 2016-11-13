@@ -60,7 +60,7 @@
 						<td>{{ testCase.testCategory }}</td>
 						<td>{{ testCase.description }}</td>
 						<td>
-							<input type="checkbox" ng-checked=({{testCase.includeInExecution}}==true) ng-model="testCase.includeInExecution" />
+							<input type="checkbox"  ng-model="testCase.includeInExecution" value="testCase.includeInExecution" />
 						</td>
 					</tr>
 					<tr ng-show="filteredTestCases.length == 0">
